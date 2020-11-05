@@ -75,14 +75,18 @@ a {
   line-height: 1.2;
 }
 
+.main-message small {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
 .description {
+  max-width: 1000px;
+  margin: 0 auto;
   padding: 0 1rem;
   font-size: 1.2rem;
   color: #888;
-}
-
-#scroll-section-2 .main-message {
-  font-size: 3.5rem;
 }
 
 .description strong {
@@ -90,6 +94,10 @@ a {
   margin-right: 0.2em;
   font-size: 3rem;
   color: rgb(29, 29, 31);
+}
+
+#scroll-section-2 .main-message {
+  font-size: 3.5rem;
 }
 
 #scroll-section-0 h1 {
@@ -109,6 +117,8 @@ a {
 }
 
 .mid-message {
+  max-width: 1000px;
+  margin: 0 auto;
   padding: 0 1rem;
   font-size: 2rem;
   color: #888;
@@ -119,6 +129,8 @@ a {
 }
 
 .canvas-caption {
+  max-width: 1000px;
+  margin: 0 auto;
   padding: 0 1rem;
   font-size: 1.2rem;
   color: #888;
@@ -130,4 +142,38 @@ a {
   justify-content: center;
   height: 7rem;
   background: #fff000;
+}
+
+@media (min-width: 1024px) {
+  #scroll-section-0 h1 {
+    font-size: 9vw;
+  }
+
+  .main-message {
+    font-size: 4vw;
+  }
+
+  .description {
+    font-size: 2rem;
+  }
+  .description strong {
+    font-size: 6rem;
+  }
+
+  #scroll-section-2 .main-message {
+    font-size: 6vw;
+  }
+  .main-message small {
+    font-size: 1.5vw;
+  }
+  .desc-message {
+    width: 20%;
+    font-weight: bold;
+  }
+  .mid-message {
+    font-size: 4vw;
+  }
+  .canvas-caption {
+    font-size: 2rem;
+  }
 }
