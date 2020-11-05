@@ -106,7 +106,7 @@ a {
 }
 
 .desc-message {
-  width: 50%;
+  width: 20%;
   font-weight: bold;
 }
 
@@ -142,6 +142,21 @@ a {
   justify-content: center;
   height: 7rem;
   background: #fff000;
+}
+
+.sticky-elem {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#show-scene-0 #scroll-section-0 .sticky-elem,
+#show-scene-1 #scroll-section-1 .sticky-elem,
+#show-scene-2 #scroll-section-2 .sticky-elem,
+#show-scene-3 #scroll-section-3 .sticky-elem {
+  display: block;
 }
 
 @media (min-width: 1024px) {
