@@ -3,6 +3,7 @@
     let yOffset = 0; //window.pageYOffset 대신 사용
     let prevScrollHeight = 0; //현재 스크롤 보다 높은 값의 섹션들의 높이 합
     let currentScene = 0; //현재 씬
+    let enterNweScene = false; //세로운 신이 시작되는 순간 true
 
     const sceneInfo =[
         {
@@ -73,8 +74,17 @@
         
     }
 
+    //현재 스크롤이 어떤 신의 어느 위치인지 나타내기
     function calValues(values, currentYoffset){
-
+        let returnValues;
+        
+        //%로 어느 위치인지 나타내기
+        let scrollRatio = currentYoffset / sceneInfo[currentScene].scrollHeight;
+        
+        //범위의 차 곱하고 초기값 더해주면 현재 위치 나옴.
+        returnValues = scrollRatio * (values[1]- values[0]) + values[0];
+        
+        return returnValues;
     }
     
     function playAnimation() {
@@ -83,9 +93,9 @@
         const currentYOffset = yOffset - prevScrollHeight;
         switch(currentScene){
             case 0:
-                let messageA_opacity_0 = sceneInfo[0].values.messageA_opacity[0];
-                let messageA_opacity_1 = sceneInfo[0].values.messageA_opacity[1];
-                calValues(values.messageA_opacity, objs);
+                let messageA_opacity_in = calValues(values.messageA_opacity, currentYOffset);
+                objs.messageA.style.opacity = messageA_opacity_in;
+                console.log(messageA_opacity_in);
                 break;
             case 1:
                 break;
@@ -101,6 +111,7 @@
 
     //스크롤시 현재 스크롤 값에 따라 섹션을 정해주고 보이는 아이디를 바꿔줌
     function scrollLoop(){
+        enterNweScene = false;
         prevScrollHeight = 0;
 
         for(let i = 0 ; i<currentScene;i++){
@@ -109,6 +120,7 @@
         
         if(yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight){
             if(currentScene !== 3){
+                enterNweScene = true;
                 currentScene++;
                 document.body.setAttribute('id',`show-scene-${currentScene}`);
             }
@@ -116,6 +128,7 @@
         
         if(yOffset < prevScrollHeight){
             if(currentScene !==0){
+                enterNweScene = true;
                 currentScene--;
                 document.body.setAttribute('id',`show-scene-${currentScene}`);
             }
@@ -131,7 +144,14 @@
         // }
 
         // document.body.setAttribute('id',`show-scene-${currentScene}`);
-        playAnimation();
+        
+        // if(enterNweScene == true){
+        //     return
+        // }
+
+        if(enterNweScene == false){
+            playAnimation();
+        }
     }
 
     window.addEventListener('resize', setLayout);
