@@ -25,20 +25,28 @@
                         start: 0.1,
                         end: 0.2
                     }
-                ],messageA_translateY_in:[20, 0, {
-                    start: 0.1,
-                    end: 0.2
-                }]
-                ,messageA_opacity_out: [
+                ],
+                messageA_translateY_in: [
+                    20,
+                    0, {
+                        start: 0.1,
+                        end: 0.2
+                    }
+                ],
+                messageA_opacity_out: [
                     1,
                     0, {
                         start: 0.25,
                         end: 0.3
                     }
-                ],messageA_translateY_out:[0, -20, {
-                    start: 0.25,
-                    end: 0.3
-                }]
+                ],
+                messageA_translateY_out: [
+                    0,
+                    -20, {
+                        start: 0.25,
+                        end: 0.3
+                    }
+                ]
             }
         }, {
             //1
@@ -70,8 +78,13 @@
     // 각 스크롤 섹션의 높이를 세팅함
     function setLayout() {
         for (let i = 0; i < sceneInfo.length; i++) {
-            sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
+            if (sceneInfo[i].type === 'sticky') {
+                sceneInfo[i].scrollHeight = sceneInfo[i].heightNum * window.innerHeight;
+            } else if (sceneInfo[i].type === 'nomal') {
+                sceneInfo[i].scrollHeight = sceneInfo[i].objs.container.offsetHeight;
+            }
             sceneInfo[i].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`
+
         }
 
         let totalScrollHeight = 0;
@@ -110,11 +123,9 @@
                     values[1] - values[0]
                 ) + values[0];
 
-            } else if(currentYoffset < partScrollStart)
-            {
+            } else if (currentYoffset < partScrollStart) {
                 returnValues = values[0];
-            }else if(currentYoffset > partScrollEnd)
-            {
+            } else if (currentYoffset > partScrollEnd) {
                 returnValues = values[1];
             }
         } else {
@@ -131,25 +142,17 @@
         const currentYOffset = yOffset - prevScrollHeight; //현재 신의 스크롤 위치를 저장함(크기)
         const scrollHeight = sceneInfo[currentScene].scrollHeight; //현재 신만의 스크롤 높이를 저장
         const scrollRatio = currentYOffset / scrollHeight; //현재 신의 스크롤 위치를 저장(비율)
-        
+
         switch (currentScene) {
             case 0:
-                const messageA_opacity_in = calValues(values.messageA_opacity_in, currentYOffset);
-                const messageA_opacity_out = calValues(values.messageA_opacity_out, currentYOffset);
-                const messageA_translateY_in = calValues(values.messageA_translateY_in, currentYOffset);
-                const messageA_translateY_out = calValues(values.messageA_translateY_out, currentYOffset);
-                if(scrollRatio <= 0.22){
-                    objs.messageA.style.opacity = messageA_opacity_in;
-                    objs.messageA.style.transform = `translateY(${messageA_translateY_in}%)`;
-                    console.log(`translateY(${messageA_translateY_in})%`);
+                if (scrollRatio <= 0.22) {
+                    objs.messageA.style.opacity = calValues(values.messageA_opacity_in, currentYOffset
+                        );
+                    objs.messageA.style.transform = `translateY(${calValues(values.messageA_translateY_in, currentYOffset)}%)`;
+                } else {
+                    objs.messageA.style.opacity = calValues(values.messageA_opacity_out, currentYOffset);
+                    objs.messageA.style.transform = `translateY(${calValues(values.messageA_translateY_out, currentYOffset)}%)`;
                 }
-                else{
-                    objs.messageA.style.opacity = messageA_opacity_out;
-                    objs.messageA.style.transform = `translateY(${messageA_translateY_out}%)`;
-                    console.log(`translateY(${messageA_translateY_out})%`);
-
-                }
-                
                 break;
             case 1:
                 break;

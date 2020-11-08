@@ -65,6 +65,7 @@ a {
 }
 
 .scroll-section {
+  border: 5px solid red;
   padding-top: 50vh;
 }
 
@@ -106,13 +107,22 @@ a {
   color: rgb(29, 29, 31);
 }
 
+#scroll-section-0 h1 {
+  font-size: 4rem;
+  text-align: center;
+}
+
 #scroll-section-2 .main-message {
   font-size: 3.5rem;
 }
 
-#scroll-section-0 h1 {
-  font-size: 4rem;
-  text-align: center;
+#scroll-section-2 .b {
+  top: 10%;
+  left: 40%;
+}
+#scroll-section-2 .c {
+  top: 15%;
+  left: 45%;
 }
 
 .desc-message {
@@ -190,6 +200,15 @@ a {
   #scroll-section-2 .main-message {
     font-size: 6vw;
   }
+
+  #scroll-section-2 .b {
+    top: 20%;
+    left: 53%;
+  }
+  #scroll-section-2 .c {
+    left: 55%;
+  }
+
   .main-message small {
     font-size: 1.5vw;
   }
