@@ -67,6 +67,7 @@ a {
 }
 
 .scroll-section {
+	position: relative;
   padding-top: 50vh;
 }
 
@@ -130,8 +131,9 @@ a {
 }
 
 .desc-message {
-  width: 20%;
+  width: 50%;
   font-weight: bold;
+  opacity: 0;
 }
 
 .pin {
