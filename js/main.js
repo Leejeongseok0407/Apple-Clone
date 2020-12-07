@@ -104,7 +104,6 @@
     }
     console.log(sceneInfo[0].objs.videoImages);
   }
-  setCanvasImages();
 
   // 각 스크롤 섹션의 높이를 세팅함
   function setLayout() {
@@ -169,6 +168,9 @@
 
     switch (currentScene) {
       case 0:
+        let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
+        objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+
         if (scrollRatio <= 0.22) {
           objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
           objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentYOffset)}%, 0)`;
@@ -272,6 +274,7 @@
     }
   }
 
+  setCanvasImages();
   window.addEventListener("resize", setLayout);
   window.addEventListener("load", setLayout);
 
