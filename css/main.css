@@ -67,7 +67,6 @@ a {
 }
 
 .scroll-section {
-  border: 5px solid red;
   padding-top: 50vh;
 }
 
@@ -110,6 +109,9 @@ a {
 }
 
 #scroll-section-0 h1 {
+  position: relative;
+  top: -10vh;
+  z-index: 5;
   font-size: 4rem;
   text-align: center;
 }
@@ -185,7 +187,12 @@ a {
 
 .sticky-elem-canvas{
   top: 0;
-  background-color: gray;
+  height: 100%;
+}
+.sticky-elem-canvas canvas{
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 
 @media (min-width: 1024px) {

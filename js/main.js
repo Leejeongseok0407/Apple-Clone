@@ -24,6 +24,7 @@
       values: {
         videoImageCount: 300,
         imageSequence: [0, 299],
+        canvas_opacity: [1, 0, { start: 0.9, end: 1 }],
         messageA_opacity_in: [0, 1, { start: 0.1, end: 0.2 }],
         messageB_opacity_in: [0, 1, { start: 0.3, end: 0.4 }],
         messageC_opacity_in: [0, 1, { start: 0.5, end: 0.6 }],
@@ -102,7 +103,6 @@
       imgElem.src = `./video/001/IMG_${6726 + i}.jpg`;
       sceneInfo[0].objs.videoImages.push(imgElem);
     }
-    console.log(sceneInfo[0].objs.videoImages);
   }
 
   // 각 스크롤 섹션의 높이를 세팅함
@@ -128,6 +128,10 @@
     }
 
     document.body.setAttribute("id", `show-scene-${currentScene}`);
+
+    //원래 캠버스 높이 (1080)에 비해 윈도우의 높이를 비율로 계산해줌
+    const hightRatio = window.innerHeight / 1080;
+    sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${hightRatio})`;
   }
 
   //현재 스크롤이 어떤 신의 어느 위치인지 나타내기
@@ -170,7 +174,7 @@
       case 0:
         let sequence = Math.round(calcValues(values.imageSequence, currentYOffset));
         objs.context.drawImage(objs.videoImages[sequence], 0, 0);
-
+        objs.canvas.style.opacity = calcValues(values.canvas_opacity, currentYOffset);
         if (scrollRatio <= 0.22) {
           objs.messageA.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset);
           objs.messageA.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentYOffset)}%, 0)`;
@@ -276,7 +280,11 @@
 
   setCanvasImages();
   window.addEventListener("resize", setLayout);
-  window.addEventListener("load", setLayout);
+
+  window.addEventListener("load", () => {
+    setLayout();
+    sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+  });
 
   window.addEventListener("scroll", () => {
     yOffset = window.pageYOffset;
