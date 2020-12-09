@@ -282,6 +282,17 @@
         break;
 
       case 3:
+        // 가로/세로를 채우기 위해 여기서 세팅(계산 요망)
+        const wdithRatio = window.innerWidth / objs.canvas.width;
+        const heightRatio = window.innerHeight / objs.canvas.height;
+        let canvasScaleRatio;
+
+        // 캔버스보다 홀쭉한 경우, 캔버스보다 창이 납작한 경우
+        if (wdithRatio <= heightRatio) canvasScaleRatio = heightRatio;
+        else canvasScaleRatio = wdithRatio;
+
+        objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
+        objs.context.drawImage(objs.images[0], 0, 0);
         break;
     }
   }
