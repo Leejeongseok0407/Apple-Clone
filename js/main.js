@@ -101,7 +101,11 @@
         imagesPath: ["./images/blend-image-1.jpg", "./images/blend-image-2.jpg"],
         images: [],
       },
-      values: {},
+      values: {
+        //출발값, 최종값으로 구성됨.
+        rect1X: [0, 0, { start: 0, end: 0 }],
+        rect2X: [0, 0, { start: 0, end: 0 }],
+      },
     },
   ];
 
@@ -283,16 +287,43 @@
 
       case 3:
         // 가로/세로를 채우기 위해 여기서 세팅(계산 요망)
+        //높이를 위주로 계산함.
         const wdithRatio = window.innerWidth / objs.canvas.width;
         const heightRatio = window.innerHeight / objs.canvas.height;
         let canvasScaleRatio;
 
         // 캔버스보다 홀쭉한 경우, 캔버스보다 창이 납작한 경우
-        if (wdithRatio <= heightRatio) canvasScaleRatio = heightRatio;
-        else canvasScaleRatio = wdithRatio;
+        if (wdithRatio <= heightRatio) {
+          canvasScaleRatio = heightRatio;
+        } else {
+          canvasScaleRatio = wdithRatio;
+        }
 
         objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
         objs.context.drawImage(objs.images[0], 0, 0);
+
+        const recalculatedInnerWidth = window.innerWidth / canvasScaleRatio;
+        const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
+
+        const whiteRectWidth = recalculatedInnerWidth * 0.15;
+
+        values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2;
+        values.rect2X[0] = values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
+        values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
+        values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
+
+        //values.rect2X[0] = whiteRectWidth / 2;
+        // values.rect2X[0] = recalculatedInnerWidth - whiteRectWidth;
+        // values.rect2X[1] = objs.canvas.width;
+
+        // console.log("1번", values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth);
+        // console.log("2번", objs.canvas.width - whiteRectWidth);
+
+        //인자에 x,y,width,height
+        objs.context.fillRect(values.rect1X[0], 0, parseInt(whiteRectWidth), objs.canvas.height);
+        objs.context.fillRect(values.rect2X[0], 0, parseInt(whiteRectWidth), recalculatedInnerHeight);
+        // objs.context.fillRect(values.rect1X[0], 0, parseInt(whiteRectWidth), recalculatedInnerHeight);
+
         break;
     }
   }
