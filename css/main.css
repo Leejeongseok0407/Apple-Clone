@@ -157,6 +157,10 @@ a {
 .mid-message a {
 }
 
+.image-blend-canvas{
+  border: 3px solid red;
+}
+
 .canvas-caption {
   max-width: 1000px;
   margin: 0 auto;
@@ -178,6 +182,13 @@ a {
   position: fixed;
   left: 0;
   width: 100%;
+}
+
+#scroll-section-3{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 
 #show-scene-0 #scroll-section-0 .sticky-elem,
