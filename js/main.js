@@ -105,6 +105,7 @@
         //출발값, 최종값으로 구성됨.
         rect1X: [0, 0, { start: 0, end: 0 }],
         rect2X: [0, 0, { start: 0, end: 0 }],
+        rectStartY: 0,
       },
     },
   ];
@@ -300,10 +301,26 @@
 
         objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
         objs.context.drawImage(objs.images[0], 0, 0);
+        objs.context.fillStyle = 'white';
 
-        const recalculatedInnerWidth = window.innerWidth / canvasScaleRatio;
+        const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
         const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
 
+        if(values.rectStartY === 0){
+          //이번 것을 스크롤 속도에 따라 값이 바뀐다.
+          // values.rectStartY = objs.canvas.getBoundingClientRect().top;
+          //아래 코드는 절대 좌표를 계산하여 가져오기 때문에 값이 변하지 않음, 뒤의 계산식은 오차를 계산하기 위한 값.
+          //켄버스의 스케일을 변경해주기 떄문에 오차를 계산 해줘야 함. 
+          values.rectStartY = objs.canvas.offsetTop + (objs.canvas.height * (1 - canvasScaleRatio)) / 2;
+
+          //윈도우 높이의 절반 부분에서 시작하게 구성하였음. 비율을 구하기 위해 scrollHeight로 나눠줌
+          values.rect1X[2].start = window.innerHeight / 2 / scrollHeight;
+          values.rect2X[2].start = window.innerHeight / 2 / scrollHeight;
+          //끝나는 시점은 화면의 상단 부분이 켄버스에 닿는 높이(미리 계산됨) 까지 왔을떄 비율을 기준으로 함.
+          values.rect1X[2].end = values.rectStartY / scrollHeight;
+          values.rect2X[2].end = values.rectStartY / scrollHeight;
+        }
+        
         const whiteRectWidth = recalculatedInnerWidth * 0.15;
 
         values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2;
@@ -311,8 +328,20 @@
         values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
         values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
 
-        objs.context.fillRect(values.rect1X[0], 0, parseInt(whiteRectWidth), objs.canvas.height);
-        objs.context.fillRect(values.rect2X[0], 0, parseInt(whiteRectWidth), recalculatedInnerHeight);
+        // objs.context.fillRect(values.rect1X[0], 0, parseInt(whiteRectWidth), objs.canvas.height);
+        // objs.context.fillRect(values.rect2X[0], 0, parseInt(whiteRectWidth), recalculatedInnerHeight);
+
+        objs.context.fillRect(
+          parseInt(calcValues(values.rect1X,currentYOffset)),
+          0,
+          parseInt(whiteRectWidth),
+          objs.canvas.height);
+
+        objs.context.fillRect(
+          parseInt(calcValues(values.rect2X,currentYOffset)),
+          0,
+          parseInt(whiteRectWidth),
+          objs.canvas.height);
 
         break;
     }
