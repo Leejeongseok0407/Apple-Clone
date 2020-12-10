@@ -67,7 +67,7 @@ a {
 }
 
 .scroll-section {
-	position: relative;
+  position: relative;
   padding-top: 50vh;
 }
 
@@ -157,8 +157,7 @@ a {
 .mid-message a {
 }
 
-.image-blend-canvas{
-  border: 3px solid red;
+.image-blend-canvas {
 }
 
 .canvas-caption {
@@ -184,11 +183,10 @@ a {
   width: 100%;
 }
 
-#scroll-section-3{
+#scroll-section-3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 #show-scene-0 #scroll-section-0 .sticky-elem,
@@ -198,11 +196,11 @@ a {
   display: block;
 }
 
-.sticky-elem-canvas{
+.sticky-elem-canvas {
   top: 0;
   height: 100%;
 }
-.sticky-elem-canvas canvas{
+.sticky-elem-canvas canvas {
   position: absolute;
   top: 50%;
   left: 50%;
