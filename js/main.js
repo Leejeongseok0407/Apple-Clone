@@ -133,7 +133,6 @@
       imgElem3.src = sceneInfo[3].objs.imagesPath[i];
       sceneInfo[3].objs.images.push(imgElem3);
     }
-    console.log(sceneInfo[3].objs.images);
   }
 
   // 각 스크롤 섹션의 높이를 세팅함
@@ -312,17 +311,8 @@
         values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
         values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
 
-        //values.rect2X[0] = whiteRectWidth / 2;
-        // values.rect2X[0] = recalculatedInnerWidth - whiteRectWidth;
-        // values.rect2X[1] = objs.canvas.width;
-
-        // console.log("1번", values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth);
-        // console.log("2번", objs.canvas.width - whiteRectWidth);
-
-        //인자에 x,y,width,height
         objs.context.fillRect(values.rect1X[0], 0, parseInt(whiteRectWidth), objs.canvas.height);
         objs.context.fillRect(values.rect2X[0], 0, parseInt(whiteRectWidth), recalculatedInnerHeight);
-        // objs.context.fillRect(values.rect1X[0], 0, parseInt(whiteRectWidth), recalculatedInnerHeight);
 
         break;
     }
