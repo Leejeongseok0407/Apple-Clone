@@ -105,6 +105,7 @@
         //출발값, 최종값으로 구성됨.
         rect1X: [0, 0, { start: 0, end: 0 }],
         rect2X: [0, 0, { start: 0, end: 0 }],
+        blendHeight:[0, 0, { start: 0, end: 0 }],
         rectStartY: 0,
       },
     },
@@ -298,15 +299,14 @@
             } else {
               canvasScaleRatio = wdithRatio;
             }
-    
+            
+            const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
+            const whiteRectWidth = recalculatedInnerWidth * 0.15;
+
             objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
             objs.context.drawImage(objs.images[0], 0, 0);
             objs.context.fillStyle = 'white';
     
-            const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
-  
-            
-            const whiteRectWidth = recalculatedInnerWidth * 0.15;
             values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2;
             values.rect2X[0] = values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
             values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
@@ -380,6 +380,18 @@
           objs.canvas.classList.remove(`sticky`);
         }else{
           step = 2;
+          values.blendHeight[0] = 0;
+          values.blendHeight[1] = objs.canvas.height;
+          values.blendHeight[2].start = values.rect1X[2].end;
+          values.blendHeight[2].end = values.blendHeight[2].start + 0.2;
+          const blendHeight = calcValues(values.blendHeight,currentYOffset);
+
+
+          objs.context.drawImage(objs.images[1]
+            ,0,objs.canvas.height - blendHeight,objs.canvas.width,blendHeight
+            ,0,objs.canvas.height - blendHeight,objs.canvas.width,blendHeight
+            );
+          
           objs.canvas.classList.add(`sticky`);
           objs.canvas.style.top=`${-canvasHeightSizeDifference}px`;
         }
