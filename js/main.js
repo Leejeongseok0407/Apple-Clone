@@ -329,24 +329,27 @@
     
       //캔버스에 이미지를 넣고 양쪽에 블럭을 채워서 이미지가 커져 보이는 효과를 줌.
       case 3:
+        let step = 0;
+
         const wdithRatio = window.innerWidth / objs.canvas.width;
         const heightRatio = window.innerHeight / objs.canvas.height;
         let canvasScaleRatio;
-
+        
         if (wdithRatio <= heightRatio) {
           canvasScaleRatio = heightRatio;
         } else {
           canvasScaleRatio = wdithRatio;
         }
+        const canvasHeightSizeDifference = (objs.canvas.height * (1 - canvasScaleRatio)) / 2;
+        const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
+        const whiteRectWidth = recalculatedInnerWidth * 0.15;
 
         objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
         objs.context.drawImage(objs.images[0], 0, 0);
         objs.context.fillStyle = 'white';
 
-        const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
-
         if(values.rectStartY === 0){
-          values.rectStartY = objs.canvas.offsetTop + (objs.canvas.height * (1 - canvasScaleRatio)) / 2;
+          values.rectStartY = objs.canvas.offsetTop + canvasHeightSizeDifference;
 
           values.rect1X[2].start = window.innerHeight / 2 / scrollHeight;
           values.rect2X[2].start = window.innerHeight / 2 / scrollHeight;
@@ -354,7 +357,6 @@
           values.rect2X[2].end = values.rectStartY / scrollHeight;
         }
         
-        const whiteRectWidth = recalculatedInnerWidth * 0.15;
 
         values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2;
         values.rect2X[0] = values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
@@ -372,6 +374,15 @@
           0,
           parseInt(whiteRectWidth),
           objs.canvas.height);
+
+        if(scrollRatio < values.rect1X[2].end){
+          step = 1;
+          objs.canvas.classList.remove(`sticky`);
+        }else{
+          step = 2;
+          objs.canvas.classList.add(`sticky`);
+          objs.canvas.style.top=`${-canvasHeightSizeDifference}px`;
+        }
 
         break;
     }
