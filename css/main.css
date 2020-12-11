@@ -157,7 +157,8 @@ a {
 .mid-message a {
 }
 
-.image-blend-canvas {
+.image-blend-canvas.sticky {
+  position: fixed;
 }
 
 .canvas-caption {
