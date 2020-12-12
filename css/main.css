@@ -163,7 +163,9 @@ a {
 
 .canvas-caption {
   max-width: 1000px;
+  margin-top:  -8em auto 0;
   margin: 0 auto;
+  opacity: 0;
   padding: 0 1rem;
   font-size: 1.2rem;
   color: #888;
@@ -217,7 +219,11 @@ a {
   }
 
   .description {
-    font-size: 2rem;
+    width: 1000px;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 1.2rem;
+    color: #888;
   }
   .description strong {
     font-size: 6rem;
@@ -243,9 +249,12 @@ a {
     font-weight: bold;
   }
   .mid-message {
+    width: 1000px;
     font-size: 4vw;
+    padding: 0;
   }
   .canvas-caption {
     font-size: 2rem;
+    padding: 0;
   }
 }
