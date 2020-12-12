@@ -401,6 +401,14 @@
     }
   }
 
+  function checkMenu() {
+    if (yOffset > 44) {
+      document.body.classList.add("local-nav-sticky");
+    } else {
+      document.body.classList.remove("local-nav-sticky");
+    }
+  }
+
   //스크롤시 현재 스크롤 값에 따라 섹션을 정해주고 보이는 아이디를 바꿔줌
   function scrollLoop() {
     enterNweScene = false;
@@ -442,6 +450,7 @@
   window.addEventListener("scroll", () => {
     yOffset = window.pageYOffset;
     scrollLoop();
+    checkMenu();
   });
   setLayout();
 })();

@@ -42,6 +42,14 @@ a {
   padding: 0 1rem;
 }
 
+.local-nav-sticky .local-nav{
+  position: fixed;
+  top: 0;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: saturate(180%) blur(15px);
+}
+
+
 .local-nav-links,
 .global-nav-link {
   display: flex;
