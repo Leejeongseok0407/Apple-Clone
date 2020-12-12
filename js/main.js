@@ -321,8 +321,6 @@
 
       //캔버스에 이미지를 넣고 양쪽에 블럭을 채워서 이미지가 커져 보이는 효과를 줌.
       case 3:
-        let step = 0;
-
         const wdithRatio = window.innerWidth / objs.canvas.width;
         const heightRatio = window.innerHeight / objs.canvas.height;
         let canvasScaleRatio;
@@ -359,10 +357,8 @@
         objs.context.fillRect(parseInt(calcValues(values.rect2X, currentYOffset)), 0, parseInt(whiteRectWidth), objs.canvas.height);
 
         if (scrollRatio < values.rect1X[2].end) {
-          step = 1;
           objs.canvas.classList.remove(`sticky`);
         } else {
-          step = 2;
           values.blendHeight[0] = 0;
           values.blendHeight[1] = objs.canvas.height;
           values.blendHeight[2].start = values.rect1X[2].end;
@@ -385,7 +381,6 @@
           }
 
           if (scrollRatio > values.canvas_scale[2].end && values.canvas_scale[2].end > 0) {
-            console.log("dd");
             objs.canvas.classList.remove(`sticky`);
             objs.canvas.style.marginTop = `${scrollHeight * 0.4}px`;
             values.canvasCaption_oppacity[2].start = values.canvas_scale[2].end;
@@ -459,7 +454,12 @@
   }
 
   setCanvasImages();
-  window.addEventListener("resize", setLayout);
+  window.addEventListener("resize", () => {
+    if (window.innerHeight > 600) setLayout();
+    sceneInfo[3].values.rectStartY = 0;
+  });
+
+  window.addEventListener("orientationchange", setLayout);
 
   window.addEventListener("load", () => {
     setLayout();

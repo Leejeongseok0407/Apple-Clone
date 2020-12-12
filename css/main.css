@@ -14,6 +14,10 @@ body {
 
 p {
   line-height: 1.6;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 
 a {
@@ -42,7 +46,7 @@ a {
   padding: 0 1rem;
 }
 
-.local-nav-sticky .local1-nav{
+.local-nav-sticky .local-nav{
   position: fixed;
   top: 0;
   background: rgba(255,255,255,0.1);
@@ -251,6 +255,7 @@ a {
 
   .main-message small {
     font-size: 1.5vw;
+    margin: 0 auto;
   }
   .desc-message {
     width: 20%;
