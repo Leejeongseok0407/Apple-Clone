@@ -462,6 +462,7 @@
   window.addEventListener("orientationchange", setLayout);
 
   window.addEventListener("load", () => {
+    document.body.classList.remove("before-loading");
     setLayout();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
   });
@@ -475,5 +476,9 @@
       rafState = true;
     }
   });
+  document.querySelector(".loading").addEventListener("transitioned", (e) => {
+    document.body.removeChild(e.currentTarget);
+  });
+
   setLayout();
 })();
