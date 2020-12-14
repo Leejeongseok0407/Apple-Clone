@@ -329,6 +329,7 @@
           canvasScaleRatio = heightRatio;
         } else {
           canvasScaleRatio = wdithRatio;
+          console.log("w");
         }
         const canvasHeightSizeDifference = (objs.canvas.height * (1 - canvasScaleRatio)) / 2;
         const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
@@ -466,7 +467,8 @@
         rafState = true;
       }
     });
-    
+  }
+
     window.addEventListener("resize", () => {
       if (window.innerHeight > 900) {
         setLayout();
@@ -474,24 +476,22 @@
       }
     });
     
-    window.addEventListener("orientationchange",()=>{ 
+    window.addEventListener("orientationchange", () => { 
       setTimeout(setLayout, 500);
-      );
-    
-    document.querySelector(".loading").addEventListener("transitioned", (e) => {
-      document.body.removeChild(e.currentTarget);
+      document.querySelector(".loading").addEventListener("transitioned", (e) => {
+        document.body.removeChild(e.currentTarget);
+      });
     });
-  }
   
   
   window.addEventListener("load", () => {
     document.body.classList.remove("before-loading");
     setLayout();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
-    loadedAddEventListener()
+    loadedAddEventListener();
   });
   
   
   setCanvasImages();
   setLayout();
-})();
+  })();
