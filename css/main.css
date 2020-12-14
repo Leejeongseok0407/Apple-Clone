@@ -25,6 +25,10 @@ a {
   text-decoration: none;
 }
 
+body.before-loading {
+  overflow: hidden;
+}
+
 .global-nav {
   position: absolute;
   top: 0;
@@ -46,13 +50,12 @@ a {
   padding: 0 1rem;
 }
 
-.local-nav-sticky .local-nav{
+.local-nav-sticky .local-nav {
   position: fixed;
   top: 0;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: saturate(180%) blur(15px);
 }
-
 
 .local-nav-links,
 .global-nav-link {
@@ -175,7 +178,7 @@ a {
 
 .canvas-caption {
   max-width: 1000px;
-  margin-top:  -8em auto 0;
+  margin-top: -8em auto 0;
   margin: 0 auto;
   opacity: 0;
   padding: 0 1rem;
@@ -239,24 +242,31 @@ a {
   opacity: 1;
 }
 
-
 @keyframes loading-spin {
-  100% {transform: rotate(360deg); }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-@keyframes loading-circle-ani{
-  0% {stroke-dashoffset : 157;}
-  75% {stroke-dashoffset : -147;}
-  100% {stroke-dashoffset : -157;}
+@keyframes loading-circle-ani {
+  0% {
+    stroke-dashoffset: 157;
+  }
+  75% {
+    stroke-dashoffset: -147;
+  }
+  100% {
+    stroke-dashoffset: -157;
+  }
 }
 
-.loading-circle{
+.loading-circle {
   width: 54px;
   height: 54px;
   animation: loading-spin 3s infinite;
 }
 
-.loading-circle circle{
+.loading-circle circle {
   stroke: black;
   stroke-width: 4;
   /* js의 getTotalLength()로 길이 얻을 수 있음. */
@@ -266,7 +276,7 @@ a {
   animation: loading-circle-ani 1s infinite;
 }
 
-.loading-circle:hover circle{
+.loading-circle:hover circle {
   stroke-dashoffset: -157;
 }
 
