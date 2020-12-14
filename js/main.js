@@ -468,11 +468,15 @@
     });
     
     window.addEventListener("resize", () => {
-      if (window.innerHeight > 600) setLayout();
-      sceneInfo[3].values.rectStartY = 0;
+      if (window.innerHeight > 900) {
+        setLayout();
+        sceneInfo[3].values.rectStartY = 0;
+      }
     });
     
-    window.addEventListener("orientationchange", setLayout);
+    window.addEventListener("orientationchange",()=>{ 
+      setTimeout(setLayout, 500);
+      );
     
     document.querySelector(".loading").addEventListener("transitioned", (e) => {
       document.body.removeChild(e.currentTarget);
