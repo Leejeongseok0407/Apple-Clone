@@ -123,7 +123,7 @@
     for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
       imgElem = document.createElement("img");
       //imgElem = new Image();
-      imgElem.src = `./video/001/IMG_${6726 + i}.jpg`;
+      imgElem.src = `./video/001/IMG_${6726 + i}.JPG`;
       sceneInfo[0].objs.videoImages.push(imgElem);
     }
 
@@ -131,7 +131,7 @@
     for (let i = 0; i < sceneInfo[2].values.videoImageCount; i++) {
       imgElem2 = document.createElement("img");
       //imgElem = new Image();
-      imgElem2.src = `./video/002/IMG_${7027 + i}.jpg`;
+      imgElem2.src = `./video/002/IMG_${7027 + i}.JPG`;
       sceneInfo[2].objs.videoImages.push(imgElem2);
     }
 
@@ -454,10 +454,7 @@
     }
   }
 
-  
-  
-  
-  function loadedAddEventListener(){
+  function loadedAddEventListener() {
     window.addEventListener("scroll", () => {
       yOffset = window.pageYOffset;
       scrollLoop();
@@ -469,29 +466,27 @@
     });
   }
 
-    window.addEventListener("resize", () => {
-      if (window.innerHeight > 900) {
-        setLayout();
-        sceneInfo[3].values.rectStartY = 0;
-      }
+  window.addEventListener("resize", () => {
+    if (window.innerHeight > 900) {
+      setLayout();
+      sceneInfo[3].values.rectStartY = 0;
+    }
+  });
+
+  window.addEventListener("orientationchange", () => {
+    setTimeout(setLayout, 500);
+    document.querySelector(".loading").addEventListener("transitioned", (e) => {
+      document.body.removeChild(e.currentTarget);
     });
-    
-    window.addEventListener("orientationchange", () => { 
-      setTimeout(setLayout, 500);
-      document.querySelector(".loading").addEventListener("transitioned", (e) => {
-        document.body.removeChild(e.currentTarget);
-      });
-    });
-  
-  
+  });
+
   window.addEventListener("load", () => {
     document.body.classList.remove("before-loading");
     setLayout();
     sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
     loadedAddEventListener();
   });
-  
-  
+
   setCanvasImages();
   setLayout();
-  })();
+})();
